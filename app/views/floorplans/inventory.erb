@@ -1,0 +1,28 @@
+<h1><%= @user.username %></h1>
+
+<p>Current Inventory:</p>
+
+<p>
+    <% @inventories.each.with_index(1) do |stock, index| %><br>
+        <span>
+        <% if stock.user_id == current_user.id %>
+            <%= "#{index}:" %>
+            <%= stock.year %>
+            <%= stock.make %>
+            <%= stock.model %>
+            <%= stock.color %>
+            <%= stock.amount %>
+            <% end %>
+        </span>
+        <% if stock.user_id == current_user.id %>  
+            <a href="floorplans/ <%= stock.id %>">View Record Info</a> 
+        <% end %>
+    <% end %>
+
+    
+</p>
+
+
+
+<p><a href="/floorplans/new">Add New</a></p>
+<p><a href="/logout">Logout</a><p>

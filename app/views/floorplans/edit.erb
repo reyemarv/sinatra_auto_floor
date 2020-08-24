@@ -1,0 +1,31 @@
+<h2>Edit Stock</h2>
+
+<form action="/floorplans/<%= @inventory.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+<p>
+    <label> Year: </label>
+    <input type="integer" name="year" placeholder="Stock Year" value=<%= @inventory.year %>>
+</p>
+
+<p>
+    <label> Make: </label>
+    <input type="text" name="make" placeholder="Stock Make" value=<%= @inventory.make %>>
+</p>
+
+<p>
+    <label> Model: </label>
+    <input type="text" name="model" placeholder="Stock Model" value=<%= @inventory.model %>>
+</p>
+
+<p>
+    <label> Color: </label>
+    <input type="text" name="color" placeholder="Stock Color" value=<%= @inventory.color %>>
+</p>
+
+<p>
+    <label> Amount: </label>
+    <input type="text" name="amount" placeholder="Stock Amount" value=<%= @inventory.amount %>>
+</p>
+
+<p><input type="Submit" value="Enter"/></p> 
+</form>

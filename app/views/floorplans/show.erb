@@ -1,0 +1,14 @@
+<h1>Stock Info</h1>
+
+<p>Stock: <%= @inventory.id %><p>
+<p>Year: <%= @inventory.year %><p>
+<p>Make: <%= @inventory.make %><p>
+<p>Model: <%= @inventory.model %><p>
+<p>Color: <%= @inventory.color %><p>
+<p>Amount: <%= @inventory.amount %><p>
+
+<p><a href="/floorplans/<%= @inventory.id %>/edit">Edit</a></p>
+<form action="/floorplans/<%= @inventory.id %>" method='post'>
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+</form>
