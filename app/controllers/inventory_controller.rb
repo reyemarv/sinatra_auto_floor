@@ -3,7 +3,7 @@ class InventoryController < ApplicationController
     get "/floorplans" do
         if logged_in?
             @user = current_user
-            @inventories = Inventory.all
+            @inventories = Inventory.where(user_id: @user.id)
             erb :"floorplans/inventory"
         else 
             redirect "/login"
