@@ -27,15 +27,6 @@ class InventoryController < ApplicationController
         end 
     end 
 
-    get "/floorplans/:id" do
-        if logged_in?
-            @inventory = Inventory.find(params[:id])
-            erb :"floorplans/show"
-        else 
-            redirect "/login"
-        end 
-    end 
-
     get "/floorplans/:id/edit" do
         if logged_in?
             @inventory = Inventory.find(params[:id])
@@ -44,6 +35,15 @@ class InventoryController < ApplicationController
             else 
                 redirect "/floorplans"
             end 
+        else 
+            redirect "/login"
+        end 
+    end 
+
+    get "/floorplans/:id" do
+        if logged_in?
+            @inventory = Inventory.find(params[:id])
+            erb :"floorplans/show"
         else 
             redirect "/login"
         end 

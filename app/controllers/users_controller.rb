@@ -1,11 +1,5 @@
 class UsersController < ApplicationController
 
-#    get "/users/:id" do
-#     if logged_in?
-#         @user = User.find(params[:id])
-#         erb :"floorplans/inventory"
-#     end 
-#    end
 
    get "/signup" do
     if logged_in?
