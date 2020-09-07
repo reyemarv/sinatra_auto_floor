@@ -1,15 +1,7 @@
 class InventoryController < ApplicationController
 
-    get "/floorplans" do
-        if logged_in?
-            @user = current_user
-            @inventories = Inventory.where(user_id: @user.id)
-            erb :"floorplans/inventory"
-        else 
-            redirect "/login"
-        end 
-    end 
-
+   #Create
+   
     get "/floorplans/new" do
         if logged_in?
             erb :"floorplans/new"
@@ -27,14 +19,13 @@ class InventoryController < ApplicationController
         end 
     end 
 
-    get "/floorplans/:id/edit" do
+    # Read 
+
+    get "/floorplans" do
         if logged_in?
-            @inventory = Inventory.find(params[:id])
-            if @inventory.user == current_user
-                erb :"floorplans/edit"
-            else 
-                redirect "/floorplans"
-            end 
+            @user = current_user
+            @inventories = Inventory.where(user_id: @user.id)
+            erb :"floorplans/inventory"
         else 
             redirect "/login"
         end 
@@ -49,6 +40,23 @@ class InventoryController < ApplicationController
         end 
     end 
 
+
+    #Update
+
+    get "/floorplans/:id/edit" do
+        if logged_in?
+            @inventory = Inventory.find(params[:id])
+            if @inventory.user == current_user
+                erb :"floorplans/edit"
+            else 
+                redirect "/floorplans"
+            end 
+        else 
+            redirect "/login"
+        end 
+    end 
+
+
     patch "/floorplans/:id" do
         if logged_in?
             @inventory = Inventory.find(params[:id])
@@ -59,6 +67,8 @@ class InventoryController < ApplicationController
             redirect "/login"
         end 
     end 
+
+    #Delete
 
     delete "/floorplans/:id" do
         if logged_in?
