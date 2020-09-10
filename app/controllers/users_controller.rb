@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     post '/signup' do
         if params[:username].empty? || params[:email].empty?
-            erb :'user/signup'
+            erb :'users/signup'
         else 
             @user = User.create(params)
             session[:user_id] = @user.id 
@@ -29,6 +29,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect "/floorplans"
         else 
+            flash[:message] = "Invalid username or password, Please try again!"
             redirect "/login"
         end 
     end 

@@ -33,7 +33,7 @@ class InventoryController < ApplicationController
 
     get "/floorplans/:id" do
         if logged_in?
-            @inventory = Inventory.find(params[:id])
+            @inventory = Inventory.find_by_id(params[:id])
             erb :"floorplans/show"
         else 
             redirect "/login"
@@ -45,11 +45,11 @@ class InventoryController < ApplicationController
 
     get "/floorplans/:id/edit" do
         if logged_in?
-            @inventory = Inventory.find(params[:id])
+            @inventory = Inventory.find_by_id(params[:id])
             if @inventory.user == current_user
                 erb :"floorplans/edit"
             else 
-                redirect "/floorplans"
+                redirect "/floorplans/#{@inventory.id}"
             end 
         else 
             redirect "/login"
@@ -59,10 +59,13 @@ class InventoryController < ApplicationController
 
     patch "/floorplans/:id" do
         if logged_in?
-            @inventory = Inventory.find(params[:id])
+            @inventory = Inventory.find_by_id(params[:id])
             @inventory_params = new_info(params)
-            @inventory.update(@inventory_params)
-            redirect "/floorplans/#{@inventory.id}"
+            if @inventory.update(@inventory_params)
+                redirect "/floorplans/#{@inventory.id}"
+            else 
+                erb :"/floorplans/edit"
+            end 
         else 
             redirect "/login"
         end 
@@ -72,9 +75,13 @@ class InventoryController < ApplicationController
 
     delete "/floorplans/:id" do
         if logged_in?
-            @inventory = Inventory.find(params[:id])
-            @inventory.delete
-            redirect "/floorplans"
+            @inventory = Inventory.find_by_id(params[:id])
+            if @inventory.user == current_user 
+                @inventory.delete
+                redirect "/floorplans"
+            else 
+                redirect "/floorplans/#{@inventory.id}"
+            end 
         else 
             redirect "/login"
         end 

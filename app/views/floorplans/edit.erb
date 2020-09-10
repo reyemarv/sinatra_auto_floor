@@ -1,6 +1,6 @@
 <h2>Edit Stock</h2>
 
-<form action="/floorplans/<%= @inventory.id %>" method="post">
+<form action="/floorplans/<%=@inventory.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
 <p>
     <label> Year: </label>
@@ -26,6 +26,8 @@
     <label> Amount: </label>
     <input type="text" name="amount" placeholder="Stock Amount" value=<%= @inventory.amount %>>
 </p>
+
+<p><a href="/floorplans">Floorplan</a></p>
 
 <p><input type="Submit" value="Enter"/></p> 
 </form>
