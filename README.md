@@ -26,3 +26,15 @@ I do plan to continue with this project. May be transferred to another framework
 Notes:
 
 A flatiron project with purpose of using Sinatra, Activrecord, and Sqlite3. This project should have ability to allow login, signup, and logout. Full CRUD funcionality. 
+
+
+get "/dogs"
+get "/dogs/:id
+get "/dogs/new
+post "/dogs"
+
+get "/dogs/:id/edit"
+patch "/dogs/:id"
+
+delete "/dogs/:id"
+

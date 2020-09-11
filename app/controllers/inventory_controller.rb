@@ -11,8 +11,8 @@ class InventoryController < ApplicationController
     end 
 
     post "/floorplans" do
-        @inventory = current_user.inventories.build(params)
-        if @inventory.save 
+        inventory = current_user.inventories.build(params)
+        if inventory.save 
             redirect "/floorplans"
         else 
             erb :"floorplans/new"
@@ -61,10 +61,11 @@ class InventoryController < ApplicationController
         if logged_in?
             @inventory = Inventory.find_by_id(params[:id])
             @inventory_params = new_info(params)
-            if @inventory.update(@inventory_params)
+            if @inventory.user == current_user 
+                @inventory.update(@inventory_params)
                 redirect "/floorplans/#{@inventory.id}"
             else 
-                erb :"/floorplans/edit"
+                erb :"/floorplans/show"
             end 
         else 
             redirect "/login"

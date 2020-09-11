@@ -10,12 +10,14 @@ class UsersController < ApplicationController
    end 
 
     post '/signup' do
-        if params[:username].empty? || params[:email].empty?
-            erb :'users/signup'
-        else 
-            @user = User.create(params)
+        @user = User.new(params)
+        # if params[:username].empty? || params[:email].empty?
+        #     erb :'users/signup'
+        if @user.save
             session[:user_id] = @user.id 
             redirect '/floorplans'
+        else 
+            redirect "/signup"
         end 
     end 
 
